@@ -1,0 +1,15 @@
+/* Header.css */
+
+.header-container {
+    background-color: #295277;
+    color: white;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .logo {
+    width: 70px;
+    height: 70px;
+    margin-right: 1600px;
+  }
+  

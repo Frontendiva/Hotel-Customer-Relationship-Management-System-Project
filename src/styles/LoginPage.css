@@ -1,0 +1,24 @@
+/* LoginPage.css */
+
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+.login-form {
+  border: 1px solid #ccc;
+  padding: 16px;
+  width: 500px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Добавьте пользовательский стиль для заголовка */
+.login-form-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
