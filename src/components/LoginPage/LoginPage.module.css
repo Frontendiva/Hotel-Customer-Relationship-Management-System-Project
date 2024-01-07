@@ -1,13 +1,13 @@
 /* LoginPage.css */
 
-.login-form-container {
+.loginFormContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 500px;
 }
 
-.login-form {
+.loginForm {
   border: 1px solid #ccc;
   padding: 16px;
   width: 500px;
@@ -17,7 +17,7 @@
 }
 
 /* Добавьте пользовательский стиль для заголовка */
-.login-form-title {
+.loginFormTitle {
   text-align: center;
   font-size: 24px;
   margin-bottom: 16px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginPage from './components/LoginPage';
-import MainLayout from './components/MainLayout';
+import LoginPage from '../src/components/LoginPage/LoginPage';
+import MainLayout from './components/MainLayout/MainLayout';
 
 
 const App = () => {

@@ -1,4 +1,6 @@
 // usersReducer.js
+import {AuthAction} from '../action/usersActions'
+
 
 const initialState = {
     user: null,
@@ -7,13 +9,13 @@ const initialState = {
   
   const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'LOGIN_SUCCESS':
+      case AuthAction.LOGIN_SUCCESS:
         return {
           ...state,
           user: action.payload,
           isAuthenticated: true,
         };
-      case 'LOGOUT':
+      case AuthAction.LOGOUT:
         return {
           ...state,
           user: null,

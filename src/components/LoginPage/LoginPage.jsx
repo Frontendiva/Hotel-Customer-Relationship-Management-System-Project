@@ -3,31 +3,35 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
-import { login } from '../action/usersActions'; // Убедитесь, что это правильный путь
-import '../styles/LoginPage.css';
+import { login } from '../../store/action/usersActions'; // Убедитесь, что это правильный путь
+import classes from './LoginPage.module.css'
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
   const onFinish = async (values) => {
     try {
       const { username, password } = values;
-      dispatch(login({ username, password }));
+      const responce = await dispatch(login({ username, password }));
+      console.log(responce)
       console.log('Login successful!');
+      navigation('/home') ;
     } catch (error) {
       console.error('Login failed:', error.message);
     }
   };
 
   return (
-    <div className="login-form-container">
+    <div className={classes.loginFormContainer}>
       <Form
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        className="login-form"
+        className={classes.loginForm}
       >
-        <h2 className="login-form-title">Authentication</h2>
+        <h2 className={classes.loginFormTitle}>Authentication</h2>
 
         <Form.Item
           label="Username"

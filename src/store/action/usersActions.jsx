@@ -1,16 +1,22 @@
 // usersActions.js
 
+export const AuthAction = { 
+  LOGIN: 'LOGIN',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGOUT: 'LOGOUT',
+}
+
 export const login = (userData) => ({
-    type: 'LOGIN',
+    type: AuthAction.LOGIN,
     payload: userData,
   });
   
   export const loginSuccess = (user) => ({
-    type: 'LOGIN_SUCCESS',
+    type: AuthAction.LOGIN_SUCCESS,
     payload: user,
   });
   
   export const logout = () => ({
-    type: 'LOGOUT',
+    type: AuthAction.LOGOUT,
   });
   
