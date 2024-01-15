@@ -1,8 +1,7 @@
-// firebase.js
-import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import 'firebase/auth'; // Добавьте этот импорт
+import { getDatabase } from 'firebase/database'; // Обратите внимание на изменение здесь
+import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAB7ry5h8KBBD0xP-Ca5_qb_GW8iUcJub0",
@@ -17,3 +16,4 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
+export const database = getDatabase(app);

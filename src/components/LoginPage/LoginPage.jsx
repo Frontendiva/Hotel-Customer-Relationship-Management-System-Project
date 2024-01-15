@@ -1,27 +1,39 @@
-// LoginPage.jsx
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/action/usersActions'; // Убедитесь, что это правильный путь
-import classes from './LoginPage.module.css'
+import { login } from '../../store/action/usersActions';
+import classes from './LoginPage.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  const [status, setStatus] = useState(null);
 
   const onFinish = async (values) => {
     try {
-      const { username, password } = values;
-      const responce = await dispatch(login({ username, password }));
-      console.log(responce)
+      setStatus('loading');
+      const response = await dispatch(login({ ...values }));
+      console.log(response);
+      setStatus('success');
       console.log('Login successful!');
-      navigation('/home') ;
+      
+      // Перенаправление на страницу HotelListPage после успешного входа
+      navigate('/rooms'); // Убедитесь, что у вас есть маршрут для HotelListPage по пути '/rooms'
     } catch (error) {
+      setStatus('error');
       console.error('Login failed:', error.message);
     }
   };
+
+  useEffect(() => {
+    // Вы можете выполнить дополнительные действия при изменении статуса, если это необходимо
+    if (status === 'success') {
+      // Дополнительные действия после успешного входа
+    } else if (status === 'error') {
+      // Дополнительные действия при ошибке входа
+    }
+  }, [status]);
 
   return (
     <div className={classes.loginFormContainer}>
@@ -54,8 +66,8 @@ const LoginForm = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
+          <Button type="primary" htmlType="submit" disabled={status === 'loading'}>
+            {status === 'loading' ? 'Logging in...' : 'Submit'}
           </Button>
         </Form.Item>
       </Form>

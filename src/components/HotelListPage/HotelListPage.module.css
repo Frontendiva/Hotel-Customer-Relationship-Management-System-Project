@@ -1,0 +1,22 @@
+/* HotelListPage.module.css */
+
+.container {
+    margin: 20px;
+  }
+  
+  .heading {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .buttonContainer {
+    margin-bottom: 16px;
+  }
+  
+  .tableContainer {
+    width: 100%;
+  }
+    .clearButton {
+    margin-right: 16px;
+  }
+    

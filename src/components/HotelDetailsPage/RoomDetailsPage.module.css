@@ -1,0 +1,28 @@
+/* HotelListPage.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Высота 100% от видимой области страницы */
+  }
+  
+  .heading {
+    margin-bottom: 20px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .clearButton {
+    margin-right: 10px;
+  }
+  
+  .tableContainer {
+    width: 80%; /* Ширина таблицы */
+  }
+  
