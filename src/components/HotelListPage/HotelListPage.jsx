@@ -4,7 +4,7 @@ import { Table, Button, Checkbox } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ref, get, child } from 'firebase/database';
 import { database } from '../../firebase/firebase';
-import styles from './HotelListPage.module.css'; // Импортируйте стили
+import styles from './HotelListPage.module.css'; 
 
 const HotelListPage = () => {
   const [rooms, setRooms] = useState([]);
@@ -72,7 +72,6 @@ const HotelListPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Hotel Rooms</h1>
       <div className={styles.buttonContainer}>
         <Button type="primary" className={styles.clearButton} onClick={handleClearAll}>
           Clear All

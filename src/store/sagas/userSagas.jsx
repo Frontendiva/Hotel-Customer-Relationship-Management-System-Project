@@ -2,7 +2,7 @@
 
 import { call, put } from 'redux-saga/effects';
 import { loginSuccess } from '../action/usersActions';
-import authApi from '../../api/auth'; // Замените на вашу функцию для входа пользователя
+import authApi from '../../api/auth'; 
 
 export function* userLogIn(action) {
   try {

@@ -7,7 +7,6 @@ import {login} from '../../action/usersActions';
 
 export function* getLogin(action) {
   try {
-    console.log('vdgddx');
     const userData = yield call(authApi.login, action.payload);
     yield put(loginSuccess(userData));
   } catch (error) {
