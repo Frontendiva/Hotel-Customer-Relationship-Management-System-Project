@@ -1,0 +1,179 @@
+/* Modal.module.css */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /* Немного прозрачный черный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #f9f9f9;
+    /* Светлый фон */
+    padding: 40px;
+    border-radius: 20px;
+    /* Закругленные углы */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    /* Мягкая тень */
+    max-width: 80%;
+    width: 400px;
+    /* Фиксированная ширина */
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    /* Цвет кнопки закрытия */
+    transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+    color: #555;
+    /* Цвет кнопки закрытия при наведении */
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 26px;
+    /* Увеличенный размер заголовка */
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    /* Увеличенный интервал после заголовка */
+}
+
+.formGroup {
+    margin-bottom: 30px;
+    /* Увеличенный интервал между полями */
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 10px;
+    /* Увеличенный интервал между метками */
+    font-weight: bold;
+    color: #555;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 15px;
+    /* Увеличенный внутренний отступ */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.formGroup input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.submitButton {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    /* Увеличенный внутренний отступ */
+    border-radius: 10px;
+    font-size: 18px;
+    /* Увеличенный размер текста кнопки */
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.submitButton:hover {
+    background: #0056b3;
+}
+
+.contactInfo {
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 2px solid #007BFF;
+    background: #f0f8ff;
+    border-radius: 15px;
+}
+
+.contactInfo p {
+    margin: 10px ;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Стилі для мобільних пристроїв */
+@media only screen and (max-width: 600px) {
+    .modal {
+        width: 60%;
+        max-width: none;
+        padding: 40px;
+    }
+
+    .closeButton {
+        top: 5px;
+        right: 5px;
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .formGroup {
+        margin-bottom: 20px;
+    }
+
+    .formGroup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .formGroup input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .submitButton {
+        padding: 12px 16px;
+        font-size: 16px;
+    }
+
+    .contactInfo {
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .contactInfo p {
+        margin: 8px 0;
+        font-size: 14px;
+    }
+}

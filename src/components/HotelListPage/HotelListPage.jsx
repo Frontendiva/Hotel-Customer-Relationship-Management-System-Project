@@ -1,85 +1,74 @@
-// HotelListPage.jsx
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Checkbox } from 'antd';
+import { Button, Checkbox, Pagination } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ref, get, child } from 'firebase/database';
 import { database } from '../../firebase/firebase';
-import styles from './HotelListPage.module.css'; 
+import styles from './HotelListPage.module.css';
 
 const HotelListPage = () => {
-  const [rooms, setRooms] = useState([]);
-  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [rooms, setRooms] = useState([]); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [roomsPerPage] = useState(6); 
   const [freeRoomsOnly, setFreeRoomsOnly] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
-      try {
-        const dbRef = ref(database, 'Rooms');
-        const snapshot = await get(child(dbRef, '/'));
-        const data = snapshot.val();
-        setRooms(data);
-        setFilteredRooms(data);
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-      }
+      const dbRef = ref(database, 'Rooms');
+      const snapshot = await get(child(dbRef, '/'));
+      const data = snapshot.val();
+      const roomsArray = data ? Object.keys(data).map(key => ({
+        id: key,
+        ...data[key]
+      })) : [];
+      setRooms(roomsArray);
     };
-
     fetchRooms();
   }, []);
-
-  useEffect(() => {
-    // Фильтрация по свободным номерам
-    if (freeRoomsOnly) {
-      const freeRooms = rooms.filter((room) => !room.occupied);
-      setFilteredRooms(freeRooms);
-    } else {
-      setFilteredRooms(rooms);
-    }
-  }, [freeRoomsOnly, rooms]);
-
-  const columns = [
-    { title: 'Number', dataIndex: 'number', key: 'number' },
-    { title: 'Type', dataIndex: 'type', key: 'type' },
-    { title: 'Occupancy', dataIndex: 'occupancy', key: 'occupancy' },
-    { title: 'Price', dataIndex: 'price', key: 'price' },
-    { title: 'Guest', dataIndex: 'guest', key: 'guest' },
-    {
-      title: 'Actions',
-      key: 'actions',
-      render: (_, record) => (
-        <Button type="primary" onClick={() => handleMoreInfo(record.id)}>
-          More Info
-        </Button>
-      ),
-    },
-  ];
-
-  const handleMoreInfo = (id) => {
-    navigate(`/rooms/${id}`);
-  };
-
-  const handleClearAll = () => {
-    setFilteredRooms(rooms);
-    setFreeRoomsOnly(false); // Добавляем сброс чекбокса при очистке
-  };
 
   const handleCheckboxChange = (e) => {
     setFreeRoomsOnly(e.target.checked);
   };
 
-  const dataSource = filteredRooms.map((room) => ({ ...room, key: room.id }));
+  const handleClearAll = () => {
+    setFreeRoomsOnly(false); 
+  };
+
+  const filteredRooms = rooms.filter(room => freeRoomsOnly ? !room.isCheckedIn : true);
+  const indexOfLastRoom = currentPage * roomsPerPage;
+  const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+  const currentRooms = filteredRooms.slice(indexOfFirstRoom, indexOfLastRoom);
 
   return (
     <div className={styles.container}>
-      <div className={styles.buttonContainer}>
-        <Button type="primary" className={styles.clearButton} onClick={handleClearAll}>
-          Clear All
-        </Button>
-        <Checkbox onChange={handleCheckboxChange}>Free rooms only</Checkbox>
+      <div className={styles.filterContainer}>
+        <Checkbox onChange={handleCheckboxChange} checked={freeRoomsOnly}>Вільні номера</Checkbox>
+        <Button onClick={handleClearAll}>Очистити все</Button>
       </div>
-      <div className={styles.tableContainer}>
-        <Table columns={columns} dataSource={dataSource} />
+      <div className={styles.roomsContainer}>
+        {currentRooms.map(room => (
+          <div key={room.id} className={styles.roomCard}>
+            {room.gallery && room.gallery.length ? (
+              <img src={room.gallery[0]} alt="Room" className={styles.roomImage} />
+            ) : (
+              <div className={styles.noImage}>No Image Available</div>
+            )}
+            <div className={styles.roomDetails}>
+              <h3 className={styles.roomTitle}>{room.type}</h3>
+              <p className={styles.roomDescription}>{room.description}</p>
+              <p className={styles.roomPrice}>Ціна: {`$${room.price}`}</p>
+              <Button className={styles.roomButton} type="primary" onClick={() => navigate(`/rooms/${room.id}`)}>Детальніше</Button>
+            </div>
+          </div>
+        ))}
+        <Pagination
+          current={currentPage}
+          onChange={page => setCurrentPage(page)}
+          total={filteredRooms.length}
+          pageSize={roomsPerPage}
+          showSizeChanger={false}
+          className={styles.pagination}
+        />
       </div>
     </div>
   );

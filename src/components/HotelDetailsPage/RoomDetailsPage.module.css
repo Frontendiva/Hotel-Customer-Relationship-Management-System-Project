@@ -1,138 +1,206 @@
 /* RoomDetailsPage.module.css */
-
+.container {
+  position: relative;
+  padding: 20px;
+  background-image: url('../../../public/ab621094390761790ad7bdfe28a604ea.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .roomDetailsContainer {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    position: relative; 
-  }
-  
-  .roomImages {
-    margin-left: 20px;
-    flex: 1;
-  }
-  
-  .imageSlider {
-    position: relative;
-  }
-  
-  .imageSlider img {
-    width: 870px;
-    height: auto;
-    max-height: 600px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .prevNextButtons {
-    position: relative; 
-    top: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: -50px;
-  }
-  
-  .prevNextButtons button {
-    font-size: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .roomInfo {
-    flex: 1;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .detailsAndFeatures {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .details,
-  .features {
-    width: 48%;
-    text-align: left;
-  }
-  
-  .details h2,
-  .features h2 {
-    text-align: center;
-  }
-  
-  .roomDetailsDescription {
-    margin-top: 10px;
-    position: fixed; 
-    bottom: 60px; 
-    left: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 50px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 1360px;
+}
+.roomDetailsContainer h1,
+.roomDetailsContainer h2,
+.roomDetailsContainer p,
+.roomDetailsContainer li {
+  color: #333;
+}
+
+.roomImages {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.imageSlider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.imageSlider img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.prevNextButtons {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.prevNextButtons button {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  font-size: 30px;
+  color: #333;
+  border-radius: 50%;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.prevNextButtons button:hover {
+  transform: scale(1.1);
+  background-color: #007BFF;
+}
+
+.roomInfo,
+.roomDetailsDescription {
+  width: 100%;
+  max-width: 1000px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  animation: fadeInUp 1s ease-out forwards;
+}
+.roomDetailsContainer h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.roomDetailsContainer p {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.roomDetailsContainer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.roomDetailsContainer li {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 10px;
+}
+.featuresList {
+  margin-top: 20px;
+}
+
+.featuresList li {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 15px;
+
+}
+
+
+.checkInButton,
+.checkOutButton {
+  padding: 3px 30px;
+  margin: 5px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-image: linear-gradient(120deg, #86a8e7, #91eae4);
+  transition: background-position 0.5s, box-shadow 0.3s ease, transform 0.3s ease;
+  background-size: 200% auto;
+  display: inline-block;
+  text-align: center;
+
+}
+
+.checkInButton:hover,
+.checkOutButton:hover {
+  background-position: right center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+.modalText {
+  font-size: 18px;
+  color: #333;
+}
+
+.modalTextUkr {
+  font-size: 18px;
+  color: #333;
+}
+.ant-modal-body p {
+  font-size: 25px;
+  color: #333;
+}
+
+.ant-picker-disabled .ant-picker-cell-inner,
+.ant-picker-disabled .ant-picker-cell {
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+
+/* Стилі для телефонів */
+@media only screen and (max-width: 600px) {
+  .roomDetailsContainer {
+    padding: 20px;
   }
 
-  .roomDetailsContainer .roomInfoButtons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
+  .roomDetailsContainer h1 {
+    font-size: 24px;
   }
-  
+
+  .roomDetailsContainer p {
+    font-size: 16px;
+  }
+
+  .roomDetailsContainer ul {
+    padding-left: 20px;  }
+
+  .roomDetailsContainer li {
+    font-size: 16px;  }
+
+  .roomImages {
+    width: 90%;  }
+
+  .imageSlider img {
+    border-radius: 8px;  }
+
+  .prevNextButtons {
+    left: 5px;    right: 5px;  }
+
+  .prevNextButtons button {
+    padding: 10px;    font-size: 24px;  }
+
+  .roomInfoButtons {
+    flex-direction: column;
+  }
+
   .checkInButton,
   .checkOutButton {
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 8px 4px;
-    padding: 10px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
   }
-  
-  .checkInButton:hover,
-  .checkOutButton:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid #4caf50;
-  }
-  
-  .checkOutButton {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 8px 4px;
-    padding: 10px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .checkOutButton:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid #008CBA;
-  }
-  
-  .roomInfoButtons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .plannedCheckOutDateInput {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-left: 10px;
-  }
+}

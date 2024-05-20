@@ -1,21 +1,154 @@
-/* Header.css */
+/* Header.module.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+  width: 100%;  
+}
 
 .headerContainer {
-    background-color: #295277;
-    color: white;
-    padding: 16px;
-    text-align: center;
+  background: #acd0f0; 
+  color: #ffffff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.headerContainer:hover {
+  background-color: #80aff7; 
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  margin-right: 20px;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  animation: colorChange 8s ease-in-out infinite;
+}
+
+@keyframes colorChange {
+  0%, 100% { color: #f3f3fa; }
+  50% { color: rgb(2, 13, 23); } 
+}
+
+.navLinks {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px; 
+  transition: all 0.3s ease;
+  position: relative;
+  margin-left: 10px;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #76ff03; 
+  bottom: -6px;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.5s ease-out;
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.navLink:hover {
+  color: #76ff03; 
+}
+
+.loginButton {
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #ffffff;
+  color: #1f1d1d; 
+}
+.socialIcons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.socialIcons a {
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+  color: #76ff03;
+}
+
+
+/* Стилі для мобільних пристроїв */
+@media only screen and (max-width: 600px) {
+  .headerContainer {
+    padding: 10px 20px;
   }
-  
+
   .logo {
-    width: 70px;
-    height: 70px;
-    margin-right: 1600px;
+    width: 50px;
+    height: 50px;
   }
-  
-  .headerTitle{
-    display: inline;
-     color: white;
+
+  .headerTitle {
+    font-size: 14px;
+    margin: 0;
   }
-  
-  
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-left: 10px;
+}
+
+  .loginButton {
+    margin-left: 0;
+    margin-bottom: 0;
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+
+  .socialIcons {
+    display: none;
+  }
+}
+

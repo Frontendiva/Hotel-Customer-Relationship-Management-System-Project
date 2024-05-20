@@ -8,14 +8,21 @@ const initialState = {
 const roomReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHECK_IN_SUCCESS:
-    case CHECK_OUT_SUCCESS:
       return {
         ...state,
         rooms: state.rooms.map((room) =>
           room.id === action.payload.id ? { ...room, checkedIn: action.payload.checkedIn } : room
         ),
       };
-
+    
+    case CHECK_OUT_SUCCESS:
+      return {
+        ...state,
+        rooms: state.rooms.map((room) =>
+          room.id === action.payload.id ? { ...room, ccheckedOut: action.payload.checkedOut } : room
+        ),
+      };
+    
     default:
       return state;
   }

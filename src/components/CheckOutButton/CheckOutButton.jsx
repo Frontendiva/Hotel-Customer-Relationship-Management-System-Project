@@ -1,10 +1,14 @@
 // CheckOutButton.jsx
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, DatePicker } from 'antd';
-import styles from '../HotelDetailsPage/RoomDetailsPage.module.css'; // Импорт стилей
+import styles from '../HotelDetailsPage/RoomDetailsPage.module.css'; 
+import { format } from "date-fns";
+import moment from 'moment';
 
-const CheckOutButton = ({ onCheckOut, setPlannedCheckOutDate }) => {
+
+const CheckOutButton = ({ onCheckOut }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [plannedCheckOutDateInternal, setPlannedCheckOutDateInternal] = useState(null);
 
@@ -13,8 +17,9 @@ const CheckOutButton = ({ onCheckOut, setPlannedCheckOutDate }) => {
   };
 
   const handleOk = () => {
-    onCheckOut();
-    setPlannedCheckOutDate(plannedCheckOutDateInternal); // Установка планируемой даты выселения
+    const formatedDate = format(plannedCheckOutDateInternal.$d, "yyyy-MM-dd")
+    onCheckOut(formatedDate);
+
     setIsModalVisible(false);
   };
 
@@ -22,7 +27,6 @@ const CheckOutButton = ({ onCheckOut, setPlannedCheckOutDate }) => {
     setIsModalVisible(false);
   };
 
-  // Обработчик изменения даты в DatePicker
   const handleDateChange = (date) => {
     setPlannedCheckOutDateInternal(date);
   };
@@ -30,19 +34,20 @@ const CheckOutButton = ({ onCheckOut, setPlannedCheckOutDate }) => {
   return (
     <>
       <Button type="primary" onClick={showModal} className={styles.checkOutButton}>
-        Check Out
+        Виписатися
       </Button>
       <Modal
-        title="Check Out"
+        title="Виписка"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Are you sure you want to check out?</p>
+        <p className={styles.modalText}>Ви впевнені, що хочете виписатися?</p>
         <DatePicker
-          placeholder="Select planned check-out date"
+          placeholder="Виберіть планову дату виписки"
           onChange={handleDateChange}
           style={{ marginTop: '10px', width: '100%' }}
+          disabledDate={(current) => current && current < moment().endOf('day')}
         />
       </Modal>
     </>
@@ -51,7 +56,6 @@ const CheckOutButton = ({ onCheckOut, setPlannedCheckOutDate }) => {
 
 CheckOutButton.propTypes = {
   onCheckOut: PropTypes.func.isRequired,
-  setPlannedCheckOutDate: PropTypes.func.isRequired,
 };
 
 export default CheckOutButton;

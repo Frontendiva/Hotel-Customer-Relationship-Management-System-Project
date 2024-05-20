@@ -1,24 +1,76 @@
-/* LoginPage.css */
 
+.pageBackground {
+  height: 100vh;
+  background-image: url('../../assets/beautiful-anime-sakura-landscape-cartoon-scene.jpg');
+  background-size: cover;
+}
 .loginFormContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 100vh; 
+  background-color: rgba(255, 255, 255, 0.264);
 }
-
-.loginForm {
-  border: 1px solid #ccc;
-  padding: 16px;
-  width: 500px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-/* Добавьте пользовательский стиль для заголовка */
 .loginFormTitle {
   text-align: center;
-  font-size: 24px;
-  margin-bottom: 16px;
+  font-size: 28px; 
+  color: #5a5a5a;
+  margin-bottom: 32px; 
 }
+
+Form.Item {
+  margin-bottom: 20px; 
+}
+
+Input,
+Input.Password {
+  width: 100%;
+  padding: 12px; 
+  border: 2px solid #e6e6e6;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+Input:focus,
+Input.Password:focus {
+  border-color: #a7c7e7;
+  box-shadow: 0 0 8px rgba(167, 199, 231, 0.6);
+}
+
+.Button {
+  width: 100%;
+  background-color: #a7c7e7;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.25s, transform 0.25s;
+}
+
+.Button:hover {
+  background-color: #ffe3e3;
+  color: #333;
+  transform: translateY(-3px);
+}
+
+.Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.Checkbox {
+  margin-bottom: 20px;
+}
+.loginForm {
+  border: 2px solid #ffffff;
+  padding: 40px;
+  width: 400px; 
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+

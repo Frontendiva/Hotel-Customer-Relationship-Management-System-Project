@@ -1,10 +1,14 @@
 // CheckInButton.jsx
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, DatePicker } from 'antd';
-import styles from '../HotelDetailsPage/RoomDetailsPage.module.css'; // Импорт стилей
+import styles from '../HotelDetailsPage/RoomDetailsPage.module.css'; 
+import { format } from "date-fns";
+import moment from 'moment';
 
-const CheckInButton = ({ onCheckIn, setPlannedCheckOutDate }) => {
+
+const CheckInButton = ({ onCheckIn }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [plannedCheckOutDateInternal, setPlannedCheckOutDateInternal] = useState(null);
 
@@ -13,8 +17,9 @@ const CheckInButton = ({ onCheckIn, setPlannedCheckOutDate }) => {
   };
 
   const handleOk = () => {
-    onCheckIn();
-    setPlannedCheckOutDate(plannedCheckOutDateInternal); // Установка планируемой даты выселения
+    const formatedDate = format(plannedCheckOutDateInternal.$d, "yyyy-MM-dd")
+    onCheckIn(formatedDate);
+    
     setIsModalVisible(false);
   };
 
@@ -22,7 +27,6 @@ const CheckInButton = ({ onCheckIn, setPlannedCheckOutDate }) => {
     setIsModalVisible(false);
   };
 
-  // Обработчик изменения даты в DatePicker
   const handleDateChange = (date) => {
     setPlannedCheckOutDateInternal(date);
   };
@@ -30,19 +34,21 @@ const CheckInButton = ({ onCheckIn, setPlannedCheckOutDate }) => {
   return (
     <>
       <Button type="primary" onClick={showModal} className={styles.checkInButton}>
-        Check In
+        Заселитися
       </Button>
       <Modal
-        title="Check In"
+        title="Заселення"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Are you sure you want to check in?</p>
+        <p className={styles.modalTextUkr}>Ви впевнені, що хочете заселитися?</p>
         <DatePicker
-          placeholder="Select planned check-out date"
+          placeholder="Виберіть планову дату заселення"
           onChange={handleDateChange}
           style={{ marginTop: '10px', width: '100%' }}
+          disabledDate={(current) => current && current < moment().endOf('day')}
+
         />
       </Modal>
     </>
@@ -51,7 +57,6 @@ const CheckInButton = ({ onCheckIn, setPlannedCheckOutDate }) => {
 
 CheckInButton.propTypes = {
   onCheckIn: PropTypes.func.isRequired,
-  setPlannedCheckOutDate: PropTypes.func.isRequired,
 };
 
 export default CheckInButton;

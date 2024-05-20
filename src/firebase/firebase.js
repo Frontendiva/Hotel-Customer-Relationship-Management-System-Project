@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { getDatabase } from 'firebase/database'; // Обратите внимание на изменение здесь
+import { getDatabase } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
