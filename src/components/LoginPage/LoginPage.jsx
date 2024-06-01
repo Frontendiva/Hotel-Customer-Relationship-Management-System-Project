@@ -5,26 +5,35 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import classes from './LoginPage.module.css';
 import { login } from '../../store/action/usersActions';
+import { fetchUserData } from '../../firebase/fetchDoc';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
-  const auth = getAuth();  
+  const auth = getAuth();
 
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const user = result.user;
-      dispatch(login({ uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL, accessToken: token }));
+
+      // Отправить данные о пользователе в Redux
+      dispatch(login({
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        // accessToken: token // Этот токен не нужен при использовании Google Sign-In
+      }));
+
       setStatus('success');
-      navigate('/rooms');
+      navigate('/profile'); // Перенаправить на страницу профиля
+      await fetchUserData(user.uid); // Получить дополнительные данные пользователя с UID
     } catch (error) {
-      console.error('Google Sign-In error:', error);
-      alert('Authentication failed. Please try again.');
+      console.error('Ошибка входа через Google:', error);
+      alert('Ошибка аутентификации. Пожалуйста, попробуйте снова.');
       setStatus('error');
     }
   };
@@ -34,7 +43,7 @@ const LoginForm = () => {
       setStatus('loading');
       await dispatch(login({ ...values }));  
       setStatus('success');
-      navigate('/rooms');
+      navigate('/profile'); // Redirect to profile page
     } catch (error) {
       setStatus('error');
       console.error('Login failed:', error.message);
@@ -43,51 +52,51 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (status === 'success') {
-      // Дополнительные действия после успешного входа
+      // Additional actions after successful login
     } else if (status === 'error') {
-      // Дополнительные действия при ошибке входа
+      // Additional actions on login error
     }
   }, [status]);
 
-  return (
+ return (
     <div className={classes.pageBackground}>
-    <div className={classes.loginFormContainer}>
-      <Form
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        className={classes.loginForm}
-      >
-        <h2 className={classes.loginFormTitle}>Authentication</h2>
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+      <div className={classes.loginFormContainer}>
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          className={classes.loginForm}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={status === 'loading'}>
-            {status === 'loading' ? 'Logging in...' : 'Submit'}
-          </Button>
-        </Form.Item>
-        <Form.Item>
-          <Button type="default" onClick={googleSignIn} disabled={status === 'loading'}>
-            Sign in with Google
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+          <h2 className={classes.loginFormTitle}>Authentication</h2>
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item name="remember" valuePropName="checked">
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Logging in...' : 'Submit'}
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <Button type="default" onClick={googleSignIn} disabled={status === 'loading'}>
+              Sign in with Google
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };

@@ -6,9 +6,9 @@ export const AuthAction = {
     LOGOUT: 'LOGOUT',
 }
 
-export const login = (userData) => ({
-    type: AuthAction.LOGIN,
-    payload: userData,
+export const login = (user) => ({
+    type: 'LOGIN',
+    payload: user,
 });
   
 export const loginSuccess = (user) => ({
@@ -17,5 +17,5 @@ export const loginSuccess = (user) => ({
 });
   
 export const logout = () => ({
-    type: AuthAction.LOGOUT,
+    type: 'LOGOUT',
 });

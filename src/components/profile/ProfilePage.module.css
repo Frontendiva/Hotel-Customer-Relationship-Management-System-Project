@@ -1,0 +1,73 @@
+/* src/components/ProfilePage/ProfilePage.module.css */
+.profileContainer {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profileInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profileImageContainer {
+    margin-right: 20px;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profileDetails {
+    flex-grow: 1;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.textArea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.userData {
+    white-space: pre-line;
+}
+
+.editButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.editButton:hover {
+    background-color: #45a049;
+}
+
+.saveButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    background-color: #45a049;
+}

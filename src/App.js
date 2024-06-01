@@ -6,6 +6,7 @@ import HotelListPage from './components/HotelListPage/HotelListPage';
 import RoomDetailsPage from './components/HotelDetailsPage/RoomDetailsPage';
 import HomePage from './components/HomePage/HomePage';
 import HotelInfoPage from './components/HomePage/HotelInfoPage';
+import ProfilePage from './components/profile/profile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route index element={<HotelListPage />} />
         <Route path=":id" element={<RoomDetailsPage />} />
       </Route>
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

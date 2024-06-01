@@ -1,24 +1,24 @@
 // usersReducer.js
-import { AuthAction } from '../action/usersActions';
+// import { AuthAction } from '../action/usersActions';
 
 const initialState = {
-    user: null,
     isAuthenticated: false,
+    user: null,
 };
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case AuthAction.LOGIN_SUCCESS:
+        case 'LOGIN':
             return {
                 ...state,
-                user: action.payload,
                 isAuthenticated: true,
+                user: action.payload,
             };
-        case AuthAction.LOGOUT:
+        case 'LOGOUT':
             return {
                 ...state,
-                user: null,
                 isAuthenticated: false,
+                user: null,
             };
         default:
             return state;
@@ -26,3 +26,4 @@ const usersReducer = (state = initialState, action) => {
 };
 
 export default usersReducer;
+
